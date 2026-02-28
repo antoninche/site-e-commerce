@@ -15,6 +15,7 @@ Le site inclut actuellement :
 - 🏠 Une page d’accueil orientée conversion
 - 🛍️ Un catalogue produits avec tri / recherche / filtres
 - 🛒 Un panier persistant via `localStorage`
+- 📄 Une fiche produit dédiée (PDP)
 - 💳 Un parcours de paiement **simulé** (démo)
 - ♿ Des améliorations accessibilité
 - 🔎 Des métadonnées SEO et social preview
@@ -49,6 +50,7 @@ Le site inclut actuellement :
 - Filtres multi-critères (genre, catégorie, badge)
 - Chips de filtres actifs
 - Cartes produits avec choix de taille + ajout au panier
+- Lien vers fiche produit détaillée (PDP)
 - Liens produits externes
 
 ### 🛒 Panier
@@ -120,6 +122,7 @@ site-e-commerce/
     ├── index.html
     ├── products.html
     ├── cart.html
+    ├── product.html
     ├── payment.html
     ├── styles.css
     └── js/

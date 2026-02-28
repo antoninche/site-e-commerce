@@ -91,12 +91,12 @@
     return `
       <article class="card">
         <div class="card-media">
-          <img src="${p.img}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer" />
+          <img src="${p.img}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${p.imgBackup || p.img}'" />
         </div>
         <div class="card-body">
           <div class="card-top">
             <div>
-              <h3 class="card-title">${p.name}</h3>
+              <h3 class="card-title"><a class="product-link" href="./product.html?id=${encodeURIComponent(p.id)}">${p.name}</a></h3>
               <div class="card-meta">${meta}</div>
             </div>
             <div style="text-align:right">
@@ -110,7 +110,7 @@
               ${sizes}
             </select>
             <button class="btn btn-primary" data-add="${p.id}" type="button">Ajouter</button>
-            <a class="btn btn-ghost" href="${p.nikeUrl}" target="_blank" rel="noreferrer">Voir sur Nike</a>
+            <a class="btn btn-ghost" href="./product.html?id=${encodeURIComponent(p.id)}">Voir détail</a>
           </div>
         </div>
       </article>
@@ -272,6 +272,100 @@
     }
   }
 
+  // PDP
+  function updateProductSEO(product){
+    document.title = `NIKE — ${product.name}`;
+
+    const desc = `${product.name} (${product.gender}, ${product.category}) à ${formatEUR(product.price)}. Démonstration e-commerce front-end.`;
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    if(descriptionMeta) descriptionMeta.setAttribute("content", desc);
+
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if(canonical) canonical.setAttribute("href", `./product.html?id=${encodeURIComponent(product.id)}`);
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if(ogTitle) ogTitle.setAttribute("content", `NIKE — ${product.name}`);
+    if(ogDesc) ogDesc.setAttribute("content", desc);
+    if(ogImage) ogImage.setAttribute("content", product.img);
+
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.name,
+      "image": [product.img],
+      "description": desc,
+      "brand": { "@type": "Brand", "name": "NIKE (démo)" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "EUR",
+        "price": String(product.price),
+        "availability": "https://schema.org/InStock",
+        "url": `./product.html?id=${encodeURIComponent(product.id)}`
+      }
+    };
+
+    const existing = document.getElementById("product-jsonld");
+    if(existing) existing.remove();
+
+    const script = document.createElement("script");
+    script.id = "product-jsonld";
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+  }
+
+  function initProductDetail(){
+    const title = document.getElementById("productTitle");
+    const meta = document.getElementById("productMeta");
+    const price = document.getElementById("productPrice");
+    const badge = document.getElementById("productBadge");
+    const img = document.getElementById("productImage");
+    const desc = document.getElementById("productDescription");
+    const size = document.getElementById("productSize");
+    const addBtn = document.getElementById("productAdd");
+    const nikeBtn = document.getElementById("productNike");
+    const related = document.getElementById("relatedGrid");
+
+    if(!title || !meta || !price || !badge || !img || !desc || !size || !addBtn || !nikeBtn || !related) return;
+
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
+    const product = window.getProductById(id);
+
+    if(!product){
+      title.textContent = "Produit introuvable";
+      desc.textContent = "Ce produit n'existe pas (ou plus) dans cette démo.";
+      addBtn.disabled = true;
+      return;
+    }
+
+    title.textContent = product.name;
+    meta.textContent = `${product.gender} • ${product.category} • Couleur: ${product.color || "N/A"}`;
+    price.textContent = formatEUR(product.price);
+    badge.innerHTML = pillHTML(product);
+    img.src = product.img;
+    img.alt = product.name;
+    img.onerror = () => { img.src = product.imgBackup || product.img; };
+    desc.textContent = product.description || `${product.name} est présenté dans cette boutique e-commerce de démonstration inspirée Nike.`;
+    size.innerHTML = (product.sizes || ["Unique"]).map(s => `<option value="${s}">${s}</option>`).join("");
+    nikeBtn.href = product.nikeUrl;
+
+    addBtn.addEventListener("click", () => {
+      addToCart(product.id, size.value, 1);
+      toast("Ajouté au panier");
+    });
+
+    const relatedProducts = window.PRODUCTS
+      .filter(p => p.id !== product.id && (p.category === product.category || p.gender === product.gender))
+      .slice(0, 4);
+
+    related.innerHTML = relatedProducts.map(productCardHTML).join("");
+
+    updateProductSEO(product);
+  }
+
   // CART
   function computeShipping(subtotal){
     if(subtotal === 0) return 0;
@@ -299,7 +393,7 @@
     const lineTotal = product.price * item.qty;
     return `
       <article class="cart-item" data-key="${item.key}">
-        <img src="${product.img}" alt="${product.name}" loading="lazy" referrerpolicy="no-referrer" />
+        <img src="${product.img}" alt="${product.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${product.imgBackup || product.img}'" />
         <div class="cart-item-body">
           <div class="cart-item-top">
             <div>
@@ -475,6 +569,7 @@
     const page = document.body.getAttribute("data-page");
     if(page === "home") initHome();
     if(page === "products") initProducts();
+    if(page === "product") initProductDetail();
     if(page === "cart") initCart();
     if(page === "payment") initPayment();
   }

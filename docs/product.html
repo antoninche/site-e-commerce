@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NIKE — Produit</title>
+  <meta name="description" content="Fiche produit détaillée de la démo e-commerce inspirée de Nike." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="./product.html" />
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content="NIKE — Produit" />
+  <meta property="og:description" content="Détails produit, tailles et ajout au panier." />
+  <meta property="og:image" content="https://www.nike.com/favicon.ico" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-page="product">
+  <a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html" aria-label="Aller à l'accueil">
+        <span class="brand-mark">NIKE</span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="./products.html">Produits</a>
+        <a class="is-active" href="./product.html">Fiche produit</a>
+        <a href="./cart.html">Panier</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="icon-btn" href="./cart.html" aria-label="Ouvrir le panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 7h15l-1.5 9h-12L6 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M6 7 5 4H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/>
+            <path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/>
+          </svg>
+          <span class="badge" data-cart-count>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="./index.html">Accueil</a>
+        <span>•</span>
+        <a href="./products.html">Produits</a>
+        <span>•</span>
+        <span>Fiche produit</span>
+      </div>
+
+      <section class="pdp-layout" aria-labelledby="productTitle">
+        <div class="pdp-media">
+          <img id="productImage" src="https://www.nike.com/favicon.ico" alt="Produit" referrerpolicy="no-referrer" />
+        </div>
+
+        <div class="pdp-content">
+          <div id="productBadge"></div>
+          <h1 id="productTitle" class="pdp-title">Chargement...</h1>
+          <div id="productMeta" class="card-meta"></div>
+          <div id="productPrice" class="pdp-price">0 €</div>
+
+          <p id="productDescription" class="pdp-description"></p>
+
+          <div class="pdp-actions">
+            <label class="field" for="productSize">
+              <span>Taille</span>
+              <select id="productSize" class="select"></select>
+            </label>
+
+            <div class="pdp-cta-row">
+              <button id="productAdd" type="button" class="btn btn-primary">Ajouter au panier</button>
+              <a id="productNike" class="btn btn-ghost" href="#" target="_blank" rel="noreferrer">Voir sur Nike</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Produits similaires</h2>
+          <a class="link" href="./products.html">Voir tout →</a>
+        </div>
+        <div id="relatedGrid" class="product-grid" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <div class="footer-brand">NIKE</div>
+          <div class="footer-note">Fiche produit de démonstration (portfolio front-end).</div>
+        </div>
+        <div class="footer-right">
+          <a class="link" href="./products.html">Produits</a>
+          <a class="link" href="./cart.html">Panier</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

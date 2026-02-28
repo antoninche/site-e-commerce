@@ -10,7 +10,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 119.99, // Nike FR
     sizes: ["35.5","36","36.5","37.5","38","39","40","40.5","41","42"],
-    img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Force_one.jpg?width=1200",
+    img: "https://secure-images.nike.com/is/image/DotCom/DD8959_001_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Force_one.jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-air-force-1-07-pour-67bFZC/DD8959-001",
     color: "Blanc",
   },
@@ -22,7 +23,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 129.99, // Nike FR
     sizes: ["35.5","36","36.5","37.5","38","39","40","40.5","41","42"],
-    img: "https://commons.wikimedia.org/wiki/Special:FilePath/Panda_Nike_Dunk.jpg?width=1200",
+    img: "https://secure-images.nike.com/is/image/DotCom/DD1503_101_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://commons.wikimedia.org/wiki/Special:FilePath/Panda_Nike_Dunk.jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-dunk-low-pour-sVmxmz",
     color: "Noir/Blanc",
   },
@@ -34,7 +36,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 149.99, // Nike FR
     sizes: ["40","40.5","41","42","42.5","43","44","44.5","45","46"],
-    img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Max_90.jpg?width=1200",
+    img: "https://secure-images.nike.com/is/image/DotCom/CN8490_002_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Max_90.jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-air-max-90-pour-dlXJdc/CN8490-002",
     color: "Noir",
   },
@@ -46,7 +49,8 @@ window.PRODUCTS = [
     badge: "Nouveau",
     price: 109.99, // Nike FR
     sizes: ["36","37","38","39","40","41","42","43","44","45"],
-    img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Max_90_Infrared_(4805905007).jpg?width=1200",
+    img: "https://secure-images.nike.com/is/image/DotCom/FD9876_101_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Max_90_Infrared_(4805905007).jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-p-6000-QWUMN8t7/FD9876-101",
     color: "Mix",
   },
@@ -58,7 +62,8 @@ window.PRODUCTS = [
     badge: "Nouveau",
     price: 29.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL"],
-    img: "https://cdn.pixabay.com/photo/2024/07/23/19/26/ai-generated-8919598_1280.png",
+    img: "https://secure-images.nike.com/is/image/DotCom/AR4997_013_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2024/07/23/19/26/ai-generated-8919598_1280.png",
     nikeUrl: "https://www.nike.com/fr/t/t-shirt-sportswear-HPobmhSd",
     color: "Noir",
   },
@@ -70,7 +75,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 64.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL"],
-    img: "https://cdn.pixabay.com/photo/2022/03/31/21/07/man-7103681_1280.jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/BV2654_010_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2022/03/31/21/07/man-7103681_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/sweat-a-capuche-sportswear-club-fleece-1DJb7j",
     color: "Noir",
   },
@@ -82,7 +88,8 @@ window.PRODUCTS = [
     badge: "Nouveau",
     price: 119.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL"],
-    img: "https://images.pexels.com/photos/5878659/pexels-photo-5878659.jpeg?cs=srgb&dl=pexels-shkrabaanthony-5878659.jpg&fm=jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/FB7921_010_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://images.pexels.com/photos/5878659/pexels-photo-5878659.jpeg?cs=srgb&dl=pexels-shkrabaanthony-5878659.jpg&fm=jpg",
     nikeUrl: "https://www.nike.com/fr/t/sweat-a-capuche-et-zip-sportswear-tech-fleece-windrunner-pour-9zh7sm",
     color: "Noir",
   },
@@ -94,7 +101,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 54.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL"],
-    img: "https://cdn.pixabay.com/photo/2020/05/12/00/11/sweatpants-5169714_1280.jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/BV2671_063_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2020/05/12/00/11/sweatpants-5169714_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/pantalon-sportswear-club-fleece-pour-cDFT2Z",
     color: "Gris/Noir",
   },
@@ -106,7 +114,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 99.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL","3XL"],
-    img: "https://cdn.pixabay.com/photo/2016/11/19/17/28/jeans-1840968_1280.jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/FB8002_435_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2016/11/19/17/28/jeans-1840968_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/pantalon-de-jogging-sportswear-tech-fleece-pour-3Gs9zz/FB8002-435",
     color: "Gris",
   },
@@ -118,7 +127,8 @@ window.PRODUCTS = [
     badge: "Nouveau",
     price: 34.99, // Nike FR
     sizes: ["S","M","L","XL","XXL","3XL"],
-    img: "https://images.pexels.com/photos/7880127/pexels-photo-7880127.jpeg?cs=srgb&dl=pexels-mart-production-7880127.jpg&fm=jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/DD1917_010_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://images.pexels.com/photos/7880127/pexels-photo-7880127.jpeg?cs=srgb&dl=pexels-mart-production-7880127.jpg&fm=jpg",
     nikeUrl: "https://www.nike.com/fr/t/short-de-fitness-pro-dri-fit-pour-vPKn5N",
     color: "Noir",
   },
@@ -130,7 +140,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 44.99, // Nike FR
     sizes: ["XS","S","M","L","XL"],
-    img: "https://cdn.pixabay.com/photo/2015/10/01/00/03/sport-966100_1280.jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/FN3216_010_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2015/10/01/00/03/sport-966100_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/legging-corsaire-taille-haute-one-pour-1rJ0ZMZt",
     color: "Noir",
   },
@@ -142,7 +153,8 @@ window.PRODUCTS = [
     badge: "Nouveau",
     price: 99.99, // Nike FR
     sizes: ["XS","S","M","L","XL"],
-    img: "https://cdn.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/HJ0036_010_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/veste-a-zip-tissee-ample-uv-windrunner-pour-d4phjwfj",
     color: "Noir",
   },
@@ -154,7 +166,8 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 24.99, // Nike FR
     sizes: ["Unique"],
-    img: "https://cdn.pixabay.com/photo/2020/06/22/04/46/nike-5330276_1280.jpg",
+    img: "https://secure-images.nike.com/is/image/DotCom/DB0488_010_A_PREM?wid=960&hei=960&fmt=jpg",
+    imgBackup: "https://cdn.pixabay.com/photo/2020/06/22/04/46/nike-5330276_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/sac-banane-heritage-RHrnz0/DB0488-010",
     color: "Noir",
   },

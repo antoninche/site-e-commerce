@@ -58,7 +58,7 @@ window.PRODUCTS = [
     badge: "Nouveau",
     price: 29.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL"],
-    img: "https://cdn.pixabay.com/photo/2024/07/23/19/26/ai-generated-8919598_1280.png",
+    img: "https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg?auto=compress&cs=tinysrgb&w=1200",
     nikeUrl: "https://www.nike.com/fr/t/t-shirt-sportswear-HPobmhSd",
     color: "Noir",
   },
@@ -94,7 +94,7 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 54.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL"],
-    img: "https://cdn.pixabay.com/photo/2020/05/12/00/11/sweatpants-5169714_1280.jpg",
+    img: "https://images.pexels.com/photos/6347546/pexels-photo-6347546.jpeg?auto=compress&cs=tinysrgb&w=1200",
     nikeUrl: "https://www.nike.com/fr/t/pantalon-sportswear-club-fleece-pour-cDFT2Z",
     color: "Gris/Noir",
   },
@@ -106,7 +106,7 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 99.99, // Nike FR
     sizes: ["XS","S","M","L","XL","XXL","3XL"],
-    img: "https://cdn.pixabay.com/photo/2016/11/19/17/28/jeans-1840968_1280.jpg",
+    img: "https://images.pexels.com/photos/6311612/pexels-photo-6311612.jpeg?auto=compress&cs=tinysrgb&w=1200",
     nikeUrl: "https://www.nike.com/fr/t/pantalon-de-jogging-sportswear-tech-fleece-pour-3Gs9zz/FB8002-435",
     color: "Gris",
   },
@@ -130,7 +130,7 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 44.99, // Nike FR
     sizes: ["XS","S","M","L","XL"],
-    img: "https://cdn.pixabay.com/photo/2015/10/01/00/03/sport-966100_1280.jpg",
+    img: "https://images.pexels.com/photos/4754134/pexels-photo-4754134.jpeg?auto=compress&cs=tinysrgb&w=1200",
     nikeUrl: "https://www.nike.com/fr/t/legging-corsaire-taille-haute-one-pour-1rJ0ZMZt",
     color: "Noir",
   },
@@ -154,7 +154,7 @@ window.PRODUCTS = [
     badge: "Best-seller",
     price: 24.99, // Nike FR
     sizes: ["Unique"],
-    img: "https://cdn.pixabay.com/photo/2020/06/22/04/46/nike-5330276_1280.jpg",
+    img: "https://images.pexels.com/photos/5698851/pexels-photo-5698851.jpeg?auto=compress&cs=tinysrgb&w=1200",
     nikeUrl: "https://www.nike.com/fr/t/sac-banane-heritage-RHrnz0/DB0488-010",
     color: "Noir",
   },

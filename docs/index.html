@@ -4,6 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NIKE — Accueil</title>
+  <meta name="description" content="Boutique e-commerce de démonstration inspirée de Nike : collections, best-sellers, filtres produits et panier interactif." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="./index.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="NIKE — Accueil" />
+  <meta property="og:description" content="Démo e-commerce inspirée Nike en HTML/CSS/JS pour portfolio front-end." />
+  <meta property="og:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Factory_Store_interior_%282023-12-03%29.jpg?width=1600" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,13 +20,19 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body data-page="home">
+  <a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+  <div class="announcement-bar" role="status" aria-live="polite">
+    Livraison offerte dès 100€ • Retours sous 30 jours • Site de démonstration portfolio
+  </div>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="./index.html" aria-label="Aller à l'accueil">
         <span class="brand-mark">NIKE</span>
       </a>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Navigation principale">
         <a href="./products.html?gender=Homme">Homme</a>
         <a href="./products.html?gender=Femme">Femme</a>
         <a href="./products.html?category=Chaussures">Chaussures</a>
@@ -41,7 +55,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
 
@@ -69,6 +83,30 @@
             <div class="stat-num">Filtres</div>
             <div class="stat-label">H/F/Catégories</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Collections spotlight</h2>
+          <a class="link" href="./products.html">Explorer →</a>
+        </div>
+
+        <div class="spotlight-grid" aria-label="Collections mises en avant">
+          <a class="spotlight-card" href="./products.html?badge=Nouveau">
+            <span class="spotlight-kicker">Nouveau</span>
+            <strong>Performance running</strong>
+          </a>
+          <a class="spotlight-card" href="./products.html?badge=Best-seller">
+            <span class="spotlight-kicker">Best-sellers</span>
+            <strong>Icons streetwear</strong>
+          </a>
+          <a class="spotlight-card" href="./products.html?category=Accessoires">
+            <span class="spotlight-kicker">Essentiels</span>
+            <strong>Accessoires du quotidien</strong>
+          </a>
         </div>
       </div>
     </section>

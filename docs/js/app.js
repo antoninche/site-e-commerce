@@ -261,6 +261,15 @@
       }
       renderProducts();
     });
+
+    const toggle = document.getElementById("toggleFilters");
+    const panel = document.getElementById("filters");
+    if(toggle && panel){
+      toggle.addEventListener("click", () => {
+        const isOpen = panel.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    }
   }
 
   // CART

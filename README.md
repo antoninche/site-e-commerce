@@ -124,20 +124,37 @@ site-e-commerce/
     ├── styles.css
     └── js/
         ├── app.js
-        ├── data.js
-        ├── cart.js
-        ├── home.js
-        ├── products.js
-        └── utils.js
+        └── data.js
 ```
 
 ---
 
+## 🌐 Déploiement GitHub Pages
 
-## 💻 Lancer le site 
+Le site est servi depuis le dossier `docs/`.
 
-Le site est accessible sur la **Github Pages** du projet: 
+Dans GitHub :
 
+1. Ouvrir **Settings** du repo
+2. Aller dans **Pages**
+3. Choisir **Deploy from a branch**
+4. Sélectionner la branche (`main` ou autre)
+5. Sélectionner le dossier **`/docs`**
+6. Enregistrer
+
+---
+
+## 💻 Lancer en local
+
+```bash
+python -m http.server 8000 --directory docs
+```
+
+Puis ouvrir :
+
+```text
+http://localhost:8000
+```
 
 ---
 
@@ -146,9 +163,28 @@ Le site est accessible sur la **Github Pages** du projet:
 - Code front sans dépendances lourdes
 - Logique principale centralisée et documentée
 - Comportements métier e-commerce simulés de façon cohérente
+- Orientation lisibilité avant sur-ingénierie
 
 ---
 
+## 🛣️ Roadmap suggérée
+
+- Fiche produit dédiée (PDP)
+- Wishlist persistante
+- Promotions avancées
+- Données produits externalisées (JSON/API simulée)
+- Tests front (unitaires sur la logique métier)
+- Refactor modulaire ES modules
+
+---
+
+## ⚠️ Notes légales / contenu
+
+- Projet de démonstration non affilié à Nike.
+- Les médias visuels utilisés pointent vers des **liens externes**.
+- Aucun asset local obligatoire pour l’exécution du site.
+
+---
 
 ## 👤 Auteur
 

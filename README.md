@@ -10,6 +10,7 @@ Le site statique est maintenant servi depuis le dossier `docs/`.
 - Page d'accueil : `docs/index.html`
 - Catalogue : `docs/products.html`
 - Panier : `docs/cart.html`
+- Paiement démo : `docs/payment.html`
 
 ## Déploiement GitHub Pages
 

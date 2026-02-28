@@ -270,6 +270,22 @@
     return 4.99;
   }
 
+  /**
+   * Centralise le calcul financier pour le panier et le paiement.
+   * @returns {{subtotal:number, shipping:number, total:number}}
+   */
+  function computeCartTotals(){
+    const cart = readCart();
+    const subtotal = cart.reduce((sum, item) => {
+      const product = window.getProductById(item.productId);
+      if(!product) return sum;
+      return sum + (product.price * item.qty);
+    }, 0);
+
+    const shipping = computeShipping(subtotal);
+    return { subtotal, shipping, total: subtotal + shipping };
+  }
+
   function cartItemHTML(item, product){
     const lineTotal = product.price * item.qty;
     return `
@@ -389,7 +405,43 @@
       renderCart();
     });
 
-    checkout.addEventListener("click", () => toast("Checkout non implémenté"));
+    checkout.addEventListener("click", () => {
+      if(readCart().length === 0){
+        toast("Ton panier est vide");
+        return;
+      }
+      window.location.href = "./payment.html";
+    });
+  }
+
+  // PAYMENT
+  function initPayment(){
+    const summarySubtotal = document.getElementById("paymentSubtotal");
+    const summaryShipping = document.getElementById("paymentShipping");
+    const summaryTotal = document.getElementById("paymentTotal");
+    const payBtn = document.getElementById("payNow");
+    const alertBox = document.getElementById("paymentDemoAlert");
+    const form = document.getElementById("paymentForm");
+
+    if(!summarySubtotal || !summaryShipping || !summaryTotal || !payBtn || !alertBox || !form) return;
+
+    const cart = readCart();
+    if(cart.length === 0){
+      window.location.href = "./cart.html";
+      return;
+    }
+
+    const totals = computeCartTotals();
+    summarySubtotal.textContent = formatEUR(totals.subtotal);
+    summaryShipping.textContent = totals.shipping === 0 ? "Gratuite" : formatEUR(totals.shipping);
+    summaryTotal.textContent = formatEUR(totals.total);
+
+    payBtn.addEventListener("click", () => {
+      if(!form.reportValidity()) return;
+
+      alertBox.classList.remove("hidden");
+      alertBox.scrollIntoView({ behavior:"smooth", block:"center" });
+    });
   }
 
   // GLOBAL handler Add to cart
@@ -415,6 +467,7 @@
     if(page === "home") initHome();
     if(page === "products") initProducts();
     if(page === "cart") initCart();
+    if(page === "payment") initPayment();
   }
 
   init();

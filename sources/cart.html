@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NIKE — Panier</title>
+  <meta name="description" content="Panier e-commerce local avec modification de quantités, frais de livraison et codes promo de démo." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,18 +13,26 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body data-page="cart">
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="./index.html" aria-label="Aller à l'accueil">
         <span class="brand-mark">NIKE</span>
       </a>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Navigation principale">
         <a href="./products.html">Produits</a>
         <a class="is-active" href="./cart.html">Panier</a>
       </nav>
 
       <div class="header-actions">
+        <button class="btn btn-ghost btn-sm" data-toggle-motion aria-pressed="false" type="button">Animations: ON</button>
+
+        <a class="icon-btn" href="./products.html" aria-label="Voir mes favoris">
+          ❤
+          <span class="badge" data-wishlist-count>0</span>
+        </a>
+
         <a class="icon-btn" href="./cart.html" aria-label="Ouvrir le panier">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 7h15l-1.5 9h-12L6 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
@@ -37,7 +46,7 @@
     </div>
   </header>
 
-  <main class="page">
+  <main id="main-content" class="page">
     <div class="container">
       <div class="page-head">
         <h1 class="page-title">Panier</h1>
@@ -63,10 +72,17 @@
             <div class="summary-title">Résumé</div>
             <div class="mini-line"><span>Sous-total</span><span id="subtotal">0 €</span></div>
             <div class="mini-line"><span>Livraison</span><span id="shipping">—</span></div>
+            <div class="mini-line"><span>Remise</span><span id="discount">—</span></div>
             <div class="mini-line total"><span>Total</span><span id="total">0 €</span></div>
 
+            <div class="promo-row">
+              <label class="sr-only" for="promoCode">Code promo</label>
+              <input id="promoCode" class="promo-input" type="text" placeholder="Code promo (WELCOME10)" />
+              <button id="applyPromo" class="btn btn-ghost" type="button">Appliquer</button>
+            </div>
+
             <button id="checkout" class="btn btn-primary w-full">Payer</button>
-            <div class="mini-note">Checkout non implémenté.</div>
+            <div class="mini-note">Checkout non implémenté. Codes démo: <strong>WELCOME10</strong> / <strong>SHIPFREE</strong>.</div>
           </div>
         </aside>
       </div>

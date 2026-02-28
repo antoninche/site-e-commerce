@@ -13,6 +13,8 @@ window.PRODUCTS = [
     img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Force_one.jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-air-force-1-07-pour-67bFZC/DD8959-001",
     color: "Blanc",
+    rating: 4.8,
+    reviews: 1260,
   },
   {
     id: "dunk-low-w",
@@ -25,6 +27,8 @@ window.PRODUCTS = [
     img: "https://commons.wikimedia.org/wiki/Special:FilePath/Panda_Nike_Dunk.jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-dunk-low-pour-sVmxmz",
     color: "Noir/Blanc",
+    rating: 4.7,
+    reviews: 980,
   },
   {
     id: "airmax90-m",
@@ -37,6 +41,8 @@ window.PRODUCTS = [
     img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Max_90.jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-air-max-90-pour-dlXJdc/CN8490-002",
     color: "Noir",
+    rating: 4.6,
+    reviews: 860,
   },
   {
     id: "p6000-u",
@@ -49,6 +55,8 @@ window.PRODUCTS = [
     img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Max_90_Infrared_(4805905007).jpg?width=1200",
     nikeUrl: "https://www.nike.com/fr/t/chaussure-p-6000-QWUMN8t7/FD9876-101",
     color: "Mix",
+    rating: 4.5,
+    reviews: 430,
   },
   {
     id: "tee-sportswear-m",
@@ -61,6 +69,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2024/07/23/19/26/ai-generated-8919598_1280.png",
     nikeUrl: "https://www.nike.com/fr/t/t-shirt-sportswear-HPobmhSd",
     color: "Noir",
+    rating: 4.4,
+    reviews: 210,
   },
   {
     id: "club-fleece-hoodie-m",
@@ -73,6 +83,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2022/03/31/21/07/man-7103681_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/sweat-a-capuche-sportswear-club-fleece-1DJb7j",
     color: "Noir",
+    rating: 4.8,
+    reviews: 1320,
   },
   {
     id: "tech-fleece-windrunner-m",
@@ -85,6 +97,8 @@ window.PRODUCTS = [
     img: "https://images.pexels.com/photos/5878659/pexels-photo-5878659.jpeg?cs=srgb&dl=pexels-shkrabaanthony-5878659.jpg&fm=jpg",
     nikeUrl: "https://www.nike.com/fr/t/sweat-a-capuche-et-zip-sportswear-tech-fleece-windrunner-pour-9zh7sm",
     color: "Noir",
+    rating: 4.6,
+    reviews: 540,
   },
   {
     id: "club-fleece-jogger-m",
@@ -97,6 +111,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2020/05/12/00/11/sweatpants-5169714_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/pantalon-sportswear-club-fleece-pour-cDFT2Z",
     color: "Gris/Noir",
+    rating: 4.5,
+    reviews: 460,
   },
   {
     id: "tech-fleece-jogger-m",
@@ -109,6 +125,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2016/11/19/17/28/jeans-1840968_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/pantalon-de-jogging-sportswear-tech-fleece-pour-3Gs9zz/FB8002-435",
     color: "Gris",
+    rating: 4.7,
+    reviews: 880,
   },
   {
     id: "pro-short-m",
@@ -121,6 +139,8 @@ window.PRODUCTS = [
     img: "https://images.pexels.com/photos/7880127/pexels-photo-7880127.jpeg?cs=srgb&dl=pexels-mart-production-7880127.jpg&fm=jpg",
     nikeUrl: "https://www.nike.com/fr/t/short-de-fitness-pro-dri-fit-pour-vPKn5N",
     color: "Noir",
+    rating: 4.3,
+    reviews: 150,
   },
   {
     id: "one-capri-w",
@@ -133,6 +153,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2015/10/01/00/03/sport-966100_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/legging-corsaire-taille-haute-one-pour-1rJ0ZMZt",
     color: "Noir",
+    rating: 4.6,
+    reviews: 720,
   },
   {
     id: "windrunner-w",
@@ -145,6 +167,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2017/08/07/14/02/people-2604149_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/veste-a-zip-tissee-ample-uv-windrunner-pour-d4phjwfj",
     color: "Noir",
+    rating: 4.4,
+    reviews: 190,
   },
   {
     id: "heritage-waistbag-u",
@@ -157,6 +181,8 @@ window.PRODUCTS = [
     img: "https://cdn.pixabay.com/photo/2020/06/22/04/46/nike-5330276_1280.jpg",
     nikeUrl: "https://www.nike.com/fr/t/sac-banane-heritage-RHrnz0/DB0488-010",
     color: "Noir",
+    rating: 4.9,
+    reviews: 2210,
   },
 ];
 

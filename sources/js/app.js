@@ -1,18 +1,30 @@
 (function(){
   const CART_KEY = "nike_cart_v1";
+  const WISHLIST_KEY = "nike_wishlist_v1";
+  const PREF_KEY = "nike_pref_v1";
 
   function formatEUR(amount){
     return amount.toLocaleString("fr-FR", { style:"currency", currency:"EUR" });
   }
 
-  function readCart(){
+  function readJSON(key, fallback){
     try{
-      const raw = localStorage.getItem(CART_KEY);
-      const cart = raw ? JSON.parse(raw) : [];
-      return Array.isArray(cart) ? cart : [];
+      const raw = localStorage.getItem(key);
+      const parsed = raw ? JSON.parse(raw) : fallback;
+      return parsed ?? fallback;
     }catch{
-      return [];
+      return fallback;
     }
+  }
+
+  function writeJSON(key, value){
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  // CART
+  function readCart(){
+    const cart = readJSON(CART_KEY, []);
+    return Array.isArray(cart) ? cart : [];
   }
 
   function cartCount(cart){
@@ -26,7 +38,7 @@
   }
 
   function writeCart(cart){
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    writeJSON(CART_KEY, cart);
     setCartBadges();
   }
 
@@ -66,6 +78,56 @@
     writeCart([]);
   }
 
+  // WISHLIST
+  function readWishlist(){
+    const list = readJSON(WISHLIST_KEY, []);
+    return Array.isArray(list) ? list : [];
+  }
+
+  function writeWishlist(list){
+    writeJSON(WISHLIST_KEY, list);
+    setWishlistBadges();
+  }
+
+  function toggleWishlist(productId){
+    const list = readWishlist();
+    const idx = list.indexOf(productId);
+    if(idx >= 0) list.splice(idx, 1);
+    else list.push(productId);
+    writeWishlist(list);
+    return list.includes(productId);
+  }
+
+  function inWishlist(productId){
+    return readWishlist().includes(productId);
+  }
+
+  function setWishlistBadges(){
+    const count = readWishlist().length;
+    document.querySelectorAll("[data-wishlist-count]").forEach(n => n.textContent = String(count));
+  }
+
+  // PREFERENCES
+  function readPrefs(){
+    const pref = readJSON(PREF_KEY, { reducedMotion: false });
+    return { reducedMotion: Boolean(pref.reducedMotion) };
+  }
+
+  function writePrefs(next){
+    writeJSON(PREF_KEY, next);
+  }
+
+  function applyPrefs(){
+    const pref = readPrefs();
+    document.body.classList.toggle("reduced-motion", pref.reducedMotion);
+
+    const toggle = document.querySelector("[data-toggle-motion]");
+    if(toggle){
+      toggle.setAttribute("aria-pressed", pref.reducedMotion ? "true" : "false");
+      toggle.textContent = pref.reducedMotion ? "Animations: OFF" : "Animations: ON";
+    }
+  }
+
   function toast(message){
     const old = document.querySelector(".toast");
     if(old) old.remove();
@@ -73,10 +135,14 @@
     const el = document.createElement("div");
     el.className = "toast";
     el.textContent = message;
+    el.setAttribute("role", "status");
+    el.setAttribute("aria-live", "polite");
     document.body.appendChild(el);
 
-    window.setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .25s ease"; }, 1400);
-    window.setTimeout(() => { el.remove(); }, 1750);
+    const pref = readPrefs();
+    const delay = pref.reducedMotion ? 800 : 1400;
+    window.setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .25s ease"; }, delay);
+    window.setTimeout(() => { el.remove(); }, delay + 350);
   }
 
   function pillHTML(p){
@@ -87,17 +153,22 @@
   function productCardHTML(p){
     const meta = `${p.gender} • ${p.category}`;
     const sizes = (p.sizes || ["Unique"]).map(s => `<option value="${s}">${s}</option>`).join("");
+    const isFav = inWishlist(p.id);
 
     return `
-      <article class="card">
+      <article class="card" data-product-id="${p.id}">
         <div class="card-media">
           <img src="${p.img}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer" />
+          <button class="wish-btn ${isFav ? "is-active" : ""}" data-wish="${p.id}" type="button" aria-label="Ajouter ${p.name} aux favoris" title="Favoris">
+            ❤
+          </button>
         </div>
         <div class="card-body">
           <div class="card-top">
             <div>
               <h3 class="card-title">${p.name}</h3>
               <div class="card-meta">${meta}</div>
+              <div class="rating" aria-label="Note ${p.rating || 4.6} sur 5">★ ${p.rating || 4.6} <span>(${p.reviews || 120})</span></div>
             </div>
             <div style="text-align:right">
               ${pillHTML(p)}
@@ -106,9 +177,10 @@
           </div>
 
           <div class="card-actions">
-            <select class="select size-select" data-size>
+            <select class="select size-select" data-size aria-label="Choisir la taille ${p.name}">
               ${sizes}
             </select>
+            <input class="qty-mini" type="number" min="1" max="9" value="1" data-qty-input aria-label="Quantité" />
             <button class="btn btn-primary" data-add="${p.id}" type="button">Ajouter</button>
             <a class="btn btn-ghost" href="${p.nikeUrl}" target="_blank" rel="noreferrer">Voir sur Nike</a>
           </div>
@@ -120,17 +192,27 @@
   // HOME
   function initHome(){
     const root = document.getElementById("home-best");
-    if(!root) return;
+    const favRoot = document.getElementById("home-favorites");
+    if(root){
+      const best = window.PRODUCTS.filter(p => p.badge === "Best-seller").slice(0, 8);
+      root.innerHTML = best.map(productCardHTML).join("");
+    }
 
-    const best = window.PRODUCTS.filter(p => p.badge === "Best-seller").slice(0, 8);
-    root.innerHTML = best.map(productCardHTML).join("");
+    if(favRoot){
+      const favIds = new Set(readWishlist());
+      const favProducts = window.PRODUCTS.filter(p => favIds.has(p.id)).slice(0, 4);
+      favRoot.innerHTML = favProducts.length
+        ? favProducts.map(productCardHTML).join("")
+        : `<div class="empty"><div class="empty-title">Aucun favori pour l'instant</div><div class="empty-text">Clique sur ❤ sur une fiche produit pour les retrouver ici.</div></div>`;
+    }
   }
 
   // PRODUCTS
   const state = {
     q: "",
     sort: "featured",
-    filters: { gender: new Set(), category: new Set(), badge: new Set() }
+    priceMax: 999,
+    filters: { gender: new Set(), category: new Set(), badge: new Set(), wish: false }
   };
 
   function matchesQuery(p, q){
@@ -140,10 +222,13 @@
   }
 
   function applyFilters(list){
+    const wished = new Set(readWishlist());
     return list.filter(p => {
       if(state.filters.gender.size && !state.filters.gender.has(p.gender)) return false;
       if(state.filters.category.size && !state.filters.category.has(p.category)) return false;
       if(state.filters.badge.size && !state.filters.badge.has(p.badge || "")) return false;
+      if(state.filters.wish && !wished.has(p.id)) return false;
+      if(p.price > state.priceMax) return false;
       if(!matchesQuery(p, state.q)) return false;
       return true;
     });
@@ -154,6 +239,7 @@
     if(state.sort === "price-asc") copy.sort((a,b) => a.price - b.price);
     else if(state.sort === "price-desc") copy.sort((a,b) => b.price - a.price);
     else if(state.sort === "name-asc") copy.sort((a,b) => a.name.localeCompare(b.name, "fr"));
+    else if(state.sort === "rating-desc") copy.sort((a,b) => (b.rating || 0) - (a.rating || 0));
     else{
       const score = (p) => (p.badge === "Best-seller" ? 2 : (p.badge === "Nouveau" ? 1 : 0));
       copy.sort((a,b) => score(b) - score(a) || a.name.localeCompare(b.name, "fr"));
@@ -169,7 +255,9 @@
     ["gender","category","badge"].forEach(group => {
       state.filters[group].forEach(val => chips.push({ group, val }));
     });
+    if(state.filters.wish) chips.push({ group:"wish", val:"Favoris" });
     if(state.q) chips.push({ group:"q", val:"Recherche: " + state.q });
+    if(state.priceMax < 999) chips.push({ group:"price", val:`Prix max: ${formatEUR(state.priceMax)}` });
 
     root.innerHTML = chips.map(c => `<button class="pill" data-chip="${c.group}|${c.val}">${c.val} ✕</button>`).join("");
   }
@@ -204,7 +292,7 @@
 
     document.querySelectorAll("input[type=checkbox][data-filter]").forEach(cb => {
       const group = cb.getAttribute("data-filter");
-      cb.checked = state.filters[group].has(cb.value);
+      cb.checked = group === "wish" ? state.filters.wish : state.filters[group].has(cb.value);
     });
   }
 
@@ -214,28 +302,45 @@
     const clear = document.getElementById("clear");
     const reset = document.getElementById("reset");
     const chips = document.getElementById("chips");
+    const priceRange = document.getElementById("priceRange");
+    const priceLabel = document.getElementById("priceLabel");
 
-    if(!q || !sort || !clear || !reset || !chips) return;
+    if(!q || !sort || !clear || !reset || !chips || !priceRange || !priceLabel) return;
 
     readParams();
+    state.priceMax = Number(priceRange.value || 999);
+    priceLabel.textContent = formatEUR(state.priceMax);
     renderProducts();
 
     q.addEventListener("input", () => { state.q = q.value.trim(); renderProducts(); });
     sort.addEventListener("change", () => { state.sort = sort.value; renderProducts(); });
 
+    priceRange.addEventListener("input", () => {
+      state.priceMax = Number(priceRange.value);
+      priceLabel.textContent = formatEUR(state.priceMax);
+      renderProducts();
+    });
+
     document.querySelectorAll("input[type=checkbox][data-filter]").forEach(cb => {
       cb.addEventListener("change", () => {
         const group = cb.getAttribute("data-filter");
-        if(cb.checked) state.filters[group].add(cb.value);
+        if(group === "wish") state.filters.wish = cb.checked;
+        else if(cb.checked) state.filters[group].add(cb.value);
         else state.filters[group].delete(cb.value);
         renderProducts();
       });
     });
 
     clear.addEventListener("click", () => {
-      Object.values(state.filters).forEach(set => set.clear());
+      state.filters.wish = false;
+      Object.entries(state.filters).forEach(([k, set]) => {
+        if(k !== "wish") set.clear();
+      });
       state.q = "";
       q.value = "";
+      priceRange.value = "999";
+      state.priceMax = 999;
+      priceLabel.textContent = formatEUR(999);
       document.querySelectorAll("input[type=checkbox][data-filter]").forEach(cb => cb.checked = false);
       renderProducts();
     });
@@ -253,6 +358,13 @@
       if(group === "q"){
         state.q = "";
         q.value = "";
+      }else if(group === "wish"){
+        state.filters.wish = false;
+        document.querySelector('input[data-filter="wish"]').checked = false;
+      }else if(group === "price"){
+        state.priceMax = 999;
+        priceRange.value = "999";
+        priceLabel.textContent = formatEUR(999);
       }else{
         state.filters[group].delete(val);
         document.querySelectorAll(`input[type=checkbox][data-filter="${group}"]`).forEach(cb => {
@@ -261,6 +373,14 @@
       }
       renderProducts();
     });
+
+    const toggle = document.getElementById("toggleFilters");
+    const panel = document.getElementById("filters");
+    toggle.addEventListener("click", () => {
+      const open = panel.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      panel.scrollIntoView({ behavior:"smooth", block:"start" });
+    });
   }
 
   // CART
@@ -268,6 +388,13 @@
     if(subtotal === 0) return 0;
     if(subtotal >= 100) return 0;
     return 4.99;
+  }
+
+  function computeDiscount(subtotal, code){
+    if(!code) return 0;
+    if(code === "WELCOME10") return subtotal * 0.10;
+    if(code === "SHIPFREE") return 0;
+    return 0;
   }
 
   function cartItemHTML(item, product){
@@ -306,9 +433,11 @@
     const empty = document.getElementById("cartEmpty");
     const subtotalEl = document.getElementById("subtotal");
     const shippingEl = document.getElementById("shipping");
+    const discountEl = document.getElementById("discount");
     const totalEl = document.getElementById("total");
+    const codeInput = document.getElementById("promoCode");
 
-    if(!list || !empty || !subtotalEl || !shippingEl || !totalEl) return;
+    if(!list || !empty || !subtotalEl || !shippingEl || !totalEl || !discountEl || !codeInput) return;
 
     const cart = readCart();
 
@@ -317,6 +446,7 @@
       empty.classList.remove("hidden");
       subtotalEl.textContent = formatEUR(0);
       shippingEl.textContent = "—";
+      discountEl.textContent = "—";
       totalEl.textContent = formatEUR(0);
       return;
     }
@@ -331,11 +461,15 @@
       return cartItemHTML(item, product);
     }).join("");
 
-    const shipping = computeShipping(subtotal);
-    const total = subtotal + shipping;
+    const shippingRaw = computeShipping(subtotal);
+    const code = codeInput.value.trim().toUpperCase();
+    const discount = computeDiscount(subtotal, code);
+    const shipping = code === "SHIPFREE" ? 0 : shippingRaw;
+    const total = Math.max(0, subtotal + shipping - discount);
 
     subtotalEl.textContent = formatEUR(subtotal);
     shippingEl.textContent = shipping === 0 ? "Gratuite" : formatEUR(shipping);
+    discountEl.textContent = discount > 0 ? `- ${formatEUR(discount)}` : "—";
     totalEl.textContent = formatEUR(total);
   }
 
@@ -343,8 +477,9 @@
     const list = document.getElementById("cartList");
     const clearBtn = document.getElementById("clearCart");
     const checkout = document.getElementById("checkout");
+    const applyPromo = document.getElementById("applyPromo");
 
-    if(!list || !clearBtn || !checkout) return;
+    if(!list || !clearBtn || !checkout || !applyPromo) return;
 
     renderCart();
 
@@ -370,7 +505,6 @@
       if(e.target.matches("[data-dec]")){
         setQty(key, item.qty - 1);
         renderCart();
-        return;
       }
     });
 
@@ -389,27 +523,65 @@
       renderCart();
     });
 
+    applyPromo.addEventListener("click", () => {
+      const code = document.getElementById("promoCode").value.trim().toUpperCase();
+      if(!code){
+        toast("Entre un code promo");
+      }else if(code !== "WELCOME10" && code !== "SHIPFREE"){
+        toast("Code promo invalide");
+      }else{
+        toast("Code promo appliqué");
+      }
+      renderCart();
+    });
+
     checkout.addEventListener("click", () => toast("Checkout non implémenté"));
   }
 
-  // GLOBAL handler Add to cart
-  function bindAddToCart(){
+  // GLOBAL handlers
+  function bindGlobal(){
     document.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-add]");
-      if(!btn) return;
-      const productId = btn.getAttribute("data-add");
-      const card = btn.closest(".card");
-      const sizeSelect = card ? card.querySelector("[data-size]") : null;
-      const size = sizeSelect ? sizeSelect.value : "Unique";
+      const addBtn = e.target.closest("[data-add]");
+      if(addBtn){
+        const productId = addBtn.getAttribute("data-add");
+        const card = addBtn.closest(".card");
+        const sizeSelect = card ? card.querySelector("[data-size]") : null;
+        const qtyInput = card ? card.querySelector("[data-qty-input]") : null;
+        const size = sizeSelect ? sizeSelect.value : "Unique";
+        const qty = qtyInput ? Number(qtyInput.value || 1) : 1;
 
-      addToCart(productId, size, 1);
-      toast("Ajouté au panier");
+        addToCart(productId, size, qty);
+        toast("Ajouté au panier");
+        return;
+      }
+
+      const wishBtn = e.target.closest("[data-wish]");
+      if(wishBtn){
+        const productId = wishBtn.getAttribute("data-wish");
+        const nowInWishlist = toggleWishlist(productId);
+        wishBtn.classList.toggle("is-active", nowInWishlist);
+        toast(nowInWishlist ? "Ajouté aux favoris" : "Retiré des favoris");
+
+        if(document.body.getAttribute("data-page") === "products") renderProducts();
+        if(document.body.getAttribute("data-page") === "home") initHome();
+      }
     });
+
+    const motionBtn = document.querySelector("[data-toggle-motion]");
+    if(motionBtn){
+      motionBtn.addEventListener("click", () => {
+        const current = readPrefs();
+        writePrefs({ reducedMotion: !current.reducedMotion });
+        applyPrefs();
+      });
+    }
   }
 
   function init(){
     setCartBadges();
-    bindAddToCart();
+    setWishlistBadges();
+    applyPrefs();
+    bindGlobal();
 
     const page = document.body.getAttribute("data-page");
     if(page === "home") initHome();

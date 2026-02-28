@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NIKE — Accueil</title>
+  <meta name="description" content="Démo e-commerce Nike-like: catalogue filtrable, panier localStorage, favoris et expérience d'achat moderne en HTML/CSS/JS." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,13 +13,14 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body data-page="home">
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="./index.html" aria-label="Aller à l'accueil">
         <span class="brand-mark">NIKE</span>
       </a>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Navigation principale">
         <a href="./products.html?gender=Homme">Homme</a>
         <a href="./products.html?gender=Femme">Femme</a>
         <a href="./products.html?category=Chaussures">Chaussures</a>
@@ -26,6 +28,13 @@
       </nav>
 
       <div class="header-actions">
+        <button class="btn btn-ghost btn-sm" data-toggle-motion aria-pressed="false" type="button">Animations: ON</button>
+
+        <a class="icon-btn" href="./products.html" aria-label="Ouvrir les favoris">
+          ❤
+          <span class="badge" data-wishlist-count>0</span>
+        </a>
+
         <a class="icon-btn" href="./cart.html" aria-label="Ouvrir le panier">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 7h15l-1.5 9h-12L6 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
@@ -41,7 +50,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
 
@@ -50,6 +59,7 @@
         <h1 class="hero-title">JUST DO<br/>YOUR THING.</h1>
         <p class="hero-text">
           Page d’accueil inspirée Nike : minimal, noir/blanc, typographie forte, grilles propres.
+          Ajout de favoris, avis produits et contrôle des animations.
         </p>
         <div class="hero-cta">
           <a class="btn btn-primary btn-lg" href="./products.html">Découvrir</a>
@@ -66,8 +76,8 @@
             <div class="stat-label">localStorage</div>
           </div>
           <div class="stat">
-            <div class="stat-num">Filtres</div>
-            <div class="stat-label">H/F/Catégories</div>
+            <div class="stat-num">Favoris</div>
+            <div class="stat-label">& filtres avancés</div>
           </div>
         </div>
       </div>
@@ -109,6 +119,17 @@
         </div>
 
         <div id="home-best" class="product-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tes favoris</h2>
+          <a class="link" href="./products.html">Gérer →</a>
+        </div>
+
+        <div id="home-favorites" class="product-grid" aria-live="polite"></div>
       </div>
     </section>
 

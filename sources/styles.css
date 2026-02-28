@@ -21,6 +21,30 @@ body{
 a{ color:inherit; text-decoration:none; }
 img{ max-width:100%; display:block; }
 
+.skip-link{
+  position:absolute;
+  left:10px;
+  top:-50px;
+  background:#111;
+  color:#fff;
+  padding:8px 10px;
+  border-radius:10px;
+  z-index:300;
+}
+.skip-link:focus{ top:10px; }
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
 .container{
   width:min(var(--container), calc(100% - 32px));
   margin:0 auto;
@@ -57,6 +81,7 @@ img{ max-width:100%; display:block; }
   border-radius:999px;
   border:1px solid var(--border);
   background:#fff;
+  font-size:15px;
 }
 .icon-btn:hover{ background:var(--soft); }
 
@@ -92,7 +117,7 @@ img{ max-width:100%; display:block; }
 .btn-lg{ padding:12px 18px; font-size:14px; }
 .w-full{ width:100%; }
 
-/* ✅ HERO corrigé : plus de dégradé vers blanc avec texte blanc */
+/* HERO */
 .hero{
   position:relative;
   padding: 54px 0 28px;
@@ -101,7 +126,6 @@ img{ max-width:100%; display:block; }
 .hero-bg{
   position:absolute;
   inset:0;
-  /* Image Wikimedia (CC BY-SA) possible : tu peux remplacer par assets/hero.jpg */
   background:
     linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.45)),
     url("https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Factory_Store_interior_%282023-12-03%29.jpg?width=2200");
@@ -177,12 +201,27 @@ img{ max-width:100%; display:block; }
   min-height: 100%;
 }
 .card:hover{ box-shadow: var(--shadow); border-color:#dedede; }
-.card-media{ aspect-ratio: 4 / 3; background:#f2f2f2; overflow:hidden; }
+.card-media{ aspect-ratio: 4 / 3; background:#f2f2f2; overflow:hidden; position:relative; }
 .card-media img{ width:100%; height:100%; object-fit: cover; transform: scale(1.02); }
+.wish-btn{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:32px;
+  height:32px;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:999px;
+  background:rgba(17,17,17,.55);
+  color:#fff;
+  cursor:pointer;
+}
+.wish-btn.is-active{ background:#fff; color:#111; border-color:#fff; }
 .card-body{ padding:12px; display:flex; flex-direction:column; gap:8px; flex:1; }
 .card-top{ display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
 .card-title{ margin:0; font-weight:900; letter-spacing:-.02em; font-size:14px; line-height:1.15; }
 .card-meta{ color: var(--muted); font-weight:700; font-size:12px; }
+.rating{ font-size:12px; font-weight:800; color:#333; margin-top:4px; }
+.rating span{ color:#767676; }
 .price{ font-weight:900; font-size:14px; }
 .pill{
   display:inline-flex; align-items:center; gap:6px;
@@ -206,6 +245,14 @@ img{ max-width:100%; display:block; }
   background:#fff;
 }
 .size-select{ flex: 1; min-width: 120px; }
+.qty-mini{
+  width:58px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:9px 6px;
+  font-weight:800;
+  text-align:center;
+}
 
 .page{ padding-top: 18px; }
 .page-head{
@@ -258,44 +305,58 @@ img{ max-width:100%; display:block; }
   padding: 8px 0;
 }
 .check input{ width:16px; height:16px; }
-.filter-footer{ padding-top:12px; border-top:1px solid var(--border); }
+.range-line{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.range-line input{ width:100%; }
+.range-line span{ font-size:12px; font-weight:800; }
+.filter-footer{ padding-top:12px; border-top:1px solid var(--border); margin-top:6px; }
 
-.content-head{ margin-bottom:10px; }
+.content-head{ margin-bottom: 10px; }
 .muted{ color: var(--muted); font-weight:800; font-size:13px; }
 
 .empty{
-  border:1px dashed var(--border);
+  border:1px dashed #d9d9d9;
   border-radius: var(--radius);
   padding: 22px;
   text-align:center;
+  background:#fff;
 }
-.empty-title{ font-weight:900; font-size:18px; margin-bottom:6px; }
-.empty-text{ color: var(--muted); font-weight:700; margin-bottom:12px; }
-.hidden{ display:none !important; }
+.empty.hidden{ display:none; }
+.empty-title{ font-size:18px; font-weight:900; letter-spacing:-.02em; }
+.empty-text{ margin-top:6px; color:var(--muted); font-weight:700; font-size:13px; }
+.empty .btn{ margin-top:12px; }
 
 /* Cart */
 .cart-layout{
   display:grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1.35fr .65fr;
   gap: 14px;
+  padding: 8px 0 30px;
   align-items:start;
-  padding: 10px 0 34px;
 }
-.cart-list{ display:flex; flex-direction:column; gap: 10px; }
+.cart-list{ display:flex; flex-direction:column; gap:10px; }
 .cart-item{
   border:1px solid var(--border);
   border-radius: var(--radius);
-  overflow:hidden;
   background:#fff;
+  overflow:hidden;
   display:grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 180px 1fr;
 }
-.cart-item img{ width:100%; height:100%; object-fit: cover; }
-.cart-item-body{ padding: 12px; display:flex; flex-direction:column; gap:8px; }
-.cart-item-top{ display:flex; justify-content:space-between; gap:10px; }
-.cart-title{ font-weight:900; margin:0; font-size:14px; }
-.cart-meta{ color: var(--muted); font-weight:800; font-size:12px; }
-.qty{ display:flex; gap:6px; align-items:center; }
+.cart-item img{
+  width:100%; height:100%;
+  object-fit:cover;
+  background:#f3f3f3;
+}
+.cart-item-body{ padding:12px; display:flex; flex-direction:column; gap:10px; }
+.cart-item-top{ display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+.cart-title{ margin:0; font-size:16px; font-weight:900; letter-spacing:-.02em; }
+.cart-meta{ margin-top:5px; color:var(--muted); font-weight:700; font-size:12px; }
+
+.qty{ display:flex; align-items:center; gap:8px; }
 .qty button{
   width:34px; height:34px;
   border-radius: 999px;
@@ -338,6 +399,14 @@ img{ max-width:100%; display:block; }
   font-weight: 800;
 }
 .mini-line.total{ border-bottom:0; padding-top:12px; font-size:14px; }
+.promo-row{ display:flex; gap:8px; margin:10px 0; }
+.promo-input{
+  flex:1;
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:10px 12px;
+  font-weight:700;
+}
 .mini-note{ margin-top:12px; color: var(--muted); font-weight:700; font-size:12px; }
 
 /* Footer */
@@ -374,6 +443,12 @@ img{ max-width:100%; display:block; }
   z-index: 200;
 }
 
+body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after{
+  transition: none !important;
+  animation: none !important;
+  scroll-behavior: auto !important;
+}
+
 /* Responsive */
 @media (max-width: 980px){
   .nav{ display:none; }
@@ -389,4 +464,5 @@ img{ max-width:100%; display:block; }
   .page-head{ flex-direction:column; align-items:flex-start; }
   .toolbar{ justify-content:flex-start; }
   .search{ min-width: 100%; }
+  .cart-item{ grid-template-columns: 1fr; }
 }

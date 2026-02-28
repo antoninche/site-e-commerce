@@ -12,13 +12,13 @@ il met l’accent sur l’UX e-commerce réelle, la lisibilité du code, l’acc
 
 Le site inclut actuellement :
 
-- 🏠 Une page d’accueil orientée conversion
-- 🛍️ Un catalogue produits avec tri / recherche / filtres
-- 🛒 Un panier persistant via `localStorage`
-- 📄 Une fiche produit dédiée (PDP)
-- 💳 Un parcours de paiement **simulé** (démo)
-- ♿ Des améliorations accessibilité
-- 🔎 Des métadonnées SEO et social preview
+- Une page d’accueil
+- Un catalogue produits avec tri / recherche / filtres
+- Un panier persistant via `localStorage`
+- Une fiche produit dédiée (PDP)
+- Un parcours de paiement **simulé** (démo)
+- Des améliorations accessibilité
+- Des métadonnées SEO et social preview
 
 ⚠️ **Important** : c’est un projet de démonstration. Aucun paiement réel n’est effectué.
 
@@ -28,7 +28,6 @@ Le site inclut actuellement :
 
 - Reproduire une expérience e-commerce crédible en front pur
 - Travailler une structure de code claire et extensible
-- Démontrer de bonnes pratiques UX / UI / accessibilité
 - Servir de base pour de futurs projets e-commerce professionnels
 
 ---
@@ -71,19 +70,6 @@ Le site inclut actuellement :
 
 ---
 
-## ♿ Accessibilité & SEO
-
-Le projet inclut une base d’amélioration pour la crédibilité portfolio :
-
-- Skip links sur les pages principales
-- Landmarks et attributs ARIA sur les composants clés
-- Focus clavier visible
-- Labels explicites pour les champs critiques
-- Balises `meta` description
-- Canonical links
-- Open Graph / Twitter Cards (aperçus sociaux)
-
----
 
 ## 🎨 Direction visuelle (inspiration Nike)
 
@@ -97,18 +83,12 @@ Le projet inclut une base d’amélioration pour la crédibilité portfolio :
 
 ## 🧩 Architecture du projet
 
-Le site est volontairement **simple et lisible** :
+Le site est **simple et lisible** :
 
 - `docs/*.html` → pages (accueil, catalogue, panier, paiement)
 - `docs/js/data.js` → données produits
 - `docs/js/app.js` → logique front principale (rendu, panier, interactions)
 - `docs/styles.css` → styles globaux + responsive
-
-Cette approche permet :
-
-- Un démarrage rapide
-- Une compréhension facile du flux
-- Une bonne base pour un futur refactor modulaire
 
 ---
 
@@ -132,35 +112,6 @@ site-e-commerce/
 
 ---
 
-## 🌐 Déploiement GitHub Pages
-
-Le site est servi depuis le dossier `docs/`.
-
-Dans GitHub :
-
-1. Ouvrir **Settings** du repo
-2. Aller dans **Pages**
-3. Choisir **Deploy from a branch**
-4. Sélectionner la branche (`main` ou autre)
-5. Sélectionner le dossier **`/docs`**
-6. Enregistrer
-
----
-
-## 💻 Lancer en local
-
-```bash
-python -m http.server 8000 --directory docs
-```
-
-Puis ouvrir :
-
-```text
-http://localhost:8000
-```
-
----
-
 ## 🧪 Qualité du code (état actuel)
 
 - Code front sans dépendances lourdes
@@ -169,18 +120,6 @@ http://localhost:8000
 - Orientation lisibilité avant sur-ingénierie
 
 ---
-
-## 🛣️ Roadmap suggérée
-
-- Fiche produit dédiée (PDP)
-- Wishlist persistante
-- Promotions avancées
-- Données produits externalisées (JSON/API simulée)
-- Tests front (unitaires sur la logique métier)
-- Refactor modulaire ES modules
-
----
-
 ## ⚠️ Notes légales / contenu
 
 - Projet de démonstration non affilié à Nike.

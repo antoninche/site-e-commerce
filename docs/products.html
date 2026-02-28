@@ -4,6 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NIKE — Produits</title>
+  <meta name="description" content="Catalogue de produits e-commerce inspiré de Nike : recherche, tri, filtres et ajout au panier." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="./products.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="NIKE — Produits" />
+  <meta property="og:description" content="Parcourez les produits de la démo e-commerce inspirée Nike." />
+  <meta property="og:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/Nike_Air_Force_one.jpg?width=1200" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,13 +20,19 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body data-page="products">
+  <a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+  <div class="announcement-bar" role="status" aria-live="polite">
+    Nouveautés toutes les semaines • Livraison offerte dès 100€
+  </div>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="./index.html" aria-label="Aller à l'accueil">
         <span class="brand-mark">NIKE</span>
       </a>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Navigation principale">
         <a href="./products.html?gender=Homme">Homme</a>
         <a href="./products.html?gender=Femme">Femme</a>
         <a href="./products.html?category=Chaussures">Chaussures</a>
@@ -39,7 +53,7 @@
     </div>
   </header>
 
-  <main class="page">
+  <main id="main-content" class="page">
     <div class="container">
       <div class="page-head">
         <h1 class="page-title">Produits</h1>
@@ -50,6 +64,7 @@
               <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/>
               <path d="M16 16l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
+            <label class="sr-only" for="q">Rechercher un produit</label>
             <input id="q" type="search" placeholder="Rechercher (Air, Fleece, Windrunner...)" autocomplete="off" />
           </div>
 
@@ -60,7 +75,7 @@
             <option value="name-asc">Nom : A → Z</option>
           </select>
 
-          <button id="toggleFilters" class="btn btn-ghost">Filtres</button>
+          <button id="toggleFilters" class="btn btn-ghost" aria-expanded="false" aria-controls="filters">Filtres</button>
         </div>
 
         <div id="chips" class="chips" aria-live="polite"></div>

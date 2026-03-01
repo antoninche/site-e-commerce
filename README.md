@@ -1,5 +1,9 @@
 # 👟 NIKE-Like Store — Projet E-commerce Front-End (Portfolio)
 ## Boutique de démonstration en HTML / CSS / JavaScript (sans framework)
+---
+
+## Lien du site web , hébergé sur Github Pages:  
+##    https://antoninche.github.io/site-e-commerce/
 
 ---
 

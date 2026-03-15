@@ -128,7 +128,6 @@ site-e-commerce/
 
 - Projet de démonstration non affilié à Nike.
 - Les médias visuels utilisés pointent vers des **liens externes**.
-- Aucun asset local obligatoire pour l’exécution du site.
 
 ---
 

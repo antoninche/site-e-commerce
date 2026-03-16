@@ -24,7 +24,7 @@ Le site inclut actuellement :
 - Des améliorations accessibilité
 - Des métadonnées SEO et social preview
 
-⚠️ **Important** : c’est un projet de démonstration. Aucun paiement réel n’est effectué.
+⚠️ **Important** : Aucun paiement réel n’est effectué.
 
 ---
 

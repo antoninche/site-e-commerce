@@ -5,7 +5,7 @@
 ## Lien du site web , hébergé sur Github Pages:  
 ##    https://antoninche.github.io/site-e-commerce/
  
----   
+---    
 
 ## 📌 Présentation
 
